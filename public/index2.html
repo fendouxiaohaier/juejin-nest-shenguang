@@ -1,0 +1,50 @@
+<!DOCTYPE html>  
+<html>  
+<head>  
+  <title>Table Display</title>  
+  <style>  
+    table {  
+      border-collapse: collapse;  
+      width: 100%;  
+    }  
+      
+    th, td {  
+      border: 1px solid black;  
+      padding: 8px;  
+      text-align: left;  
+    }  
+  </style>  
+</head>  
+<body>  
+  <h2>接口返回的字段展示</h2>  
+    
+  <table id="myTable">  
+    <tr>  
+      <th>IP</th>  
+      <th>Create Time</th>  
+      <th>Request IP</th>  
+    </tr>  
+  </table>  
+    
+  <script>  
+    // 假设接口返回的数据格式如下  
+    var data = [  
+      { ip: '192.168.0.1', createTime: '2023-07-19 10:00:00', requestIp: '10.0.0.2' },  
+      { ip: '192.168.0.2', createTime: '2023-07-19 11:00:00', requestIp: '10.0.0.3' },  
+      { ip: '192.168.0.3', createTime: '2023-07-19 12:00:00', requestIp: '10.0.0.4' }  
+    ];  
+      
+    // 将数据添加到表格中  
+    var table = document.getElementById('myTable');  
+    for (var i = 0; i < data.length; i++) {  
+      var row = table.insertRow(i + 1); // 在表格中插入新行  
+      var ipCell = row.insertCell(0); // 在新行中插入IP单元格  
+      var createTimeCell = row.insertCell(1); // 在新行中插入Create Time单元格  
+      var requestIpCell = row.insertCell(2); // 在新行中插入Request IP单元格  
+      ipCell.innerHTML = data[i].ip; // 设置IP单元格的内容  
+      createTimeCell.innerHTML = data[i].createTime; // 设置Create Time单元格的内容  
+      requestIpCell.innerHTML = data[i].requestIp; // 设置Request IP单元格的内容  
+    }  
+  </script>  
+</body>  
+</html>
