@@ -15,11 +15,10 @@ import { PersonService } from './person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 
+// 下面五种方式传递数据
 @Controller('api/person')
 export class PersonController {
   constructor(private readonly personService: PersonService) {}
-
-  // 下面五种方式传递数据
 
   // 文件方式
   @Post('file')
