@@ -7,6 +7,9 @@ import {
 import { Observable } from 'rxjs';
 import { AppService } from './app.service';
 
+/**
+ * @description 路由守卫 一般用于鉴权
+ */
 @Injectable()
 export class LoginGuard implements CanActivate {
   @Inject(AppService)

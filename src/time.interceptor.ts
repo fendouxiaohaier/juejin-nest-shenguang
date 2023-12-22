@@ -6,6 +6,9 @@ import {
 } from '@nestjs/common';
 import { Observable, tap } from 'rxjs';
 
+/**
+ * @description 拦截器，可以在目标 Controller 方法前后加入一些逻辑
+ */
 @Injectable()
 export class TimeInterceptor implements NestInterceptor {
   intercept(context: ExecutionContext, next: CallHandler): Observable<any> {

@@ -41,7 +41,7 @@ export class AppController {
 
   // 这个接口用于测试pipe validate ValidatePipe
   @Get('ccc')
-  @UseFilters(TestFilter) // 使用异常过滤器
+  @UseFilters(TestFilter) // 使用异常过滤器 这种方式是只给某个handler加一个过滤器
   getHelloCcc(@Query('num', ValidatePipe) num: number): string {
     console.log('handle getHelloCcc');
     return this.appService.getHello() + num;

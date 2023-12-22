@@ -4,6 +4,7 @@ import { Request, Response, NextFunction } from 'express';
 
 import { AppModule } from './app.module';
 import { TimeInterceptor } from './time.interceptor';
+import { TestFilter } from './test.filter';
 // import { LoginGuard } from './login.guard';
 
 async function bootstrap() {
@@ -25,6 +26,9 @@ async function bootstrap() {
 
   // 全局拦截器
   // app.useGlobalInterceptors(new TimeInterceptor());
+
+  // 全局异常补捕获
+  // app.useGlobalFilters(new TestFilter());
 
   await app.listen(3000);
 }

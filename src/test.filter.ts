@@ -6,6 +6,9 @@ import {
 } from '@nestjs/common';
 import { Response } from 'express';
 
+/**
+ * @description 这个TestFilter专门处理BadRequestException类型的一场
+ */
 @Catch(BadRequestException)
 export class TestFilter implements ExceptionFilter {
   catch(exception: BadRequestException, host: ArgumentsHost) {
