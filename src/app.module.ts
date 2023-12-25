@@ -6,9 +6,10 @@ import { LogMiddleware } from './log.middleware';
 import { LoginGuard } from './login.guard';
 import { TimeInterceptor } from './time.interceptor';
 import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { CustomDecoratorModule } from './custom-decorator/custom-decorator.module';
 
 @Module({
-  imports: [PersonModule],
+  imports: [PersonModule, CustomDecoratorModule],
   controllers: [AppController],
   providers: [
     AppService,
