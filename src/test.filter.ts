@@ -7,7 +7,7 @@ import {
 import { Response } from 'express';
 
 /**
- * @description 这个TestFilter专门处理BadRequestException类型的一场
+ * @description 这个TestFilter专门处理BadRequestException类型的异常
  */
 @Catch(BadRequestException)
 export class TestFilter implements ExceptionFilter {

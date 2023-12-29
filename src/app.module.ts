@@ -5,14 +5,20 @@ import { PersonModule } from './person/person.module';
 import { LogMiddleware } from './log.middleware';
 import { LoginGuard } from './login.guard';
 import { TimeInterceptor } from './time.interceptor';
-import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { CustomDecoratorModule } from './custom-decorator/custom-decorator.module';
+import { TestFilter } from './test.filter';
 
 @Module({
   imports: [PersonModule, CustomDecoratorModule],
   controllers: [AppController],
   providers: [
     AppService,
+    // 这也是一种全局的注册处理Filter的方式，这种方式可以在Filter中注入其他依赖
+    // {
+    //   provide: APP_FILTER,
+    //   useClass: TestFilter,
+    // },
     {
       provide: APP_GUARD,
       useClass: LoginGuard, // 这种方式注入守卫也是全局，这种方式可以在里面再注意其他provide
