@@ -9,14 +9,17 @@ import {
   Query,
   UseInterceptors,
   UploadedFiles,
+  ValidationPipe,
+  UseFilters,
 } from '@nestjs/common';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
 import { PersonService } from './person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
+import { TestFilter } from 'src/test.filter';
 
 // 下面五种方式传递数据
-@Controller('api/person')
+@Controller('api/person/')
 export class PersonController {
   constructor(private readonly personService: PersonService) {}
 
@@ -44,7 +47,7 @@ export class PersonController {
   bodyJson(@Body() createPersonDto: CreatePersonDto) {
     // return `received: ${JSON.stringify(createPersonDto)}`;
     // 返回对象，前端接收到的就是一个对象
-    return { name: createPersonDto.name };
+    return { name: createPersonDto.email };
   }
 
   // form url 方式
@@ -67,8 +70,9 @@ export class PersonController {
     return `received: id=${id}`;
   }
 
-  @Post()
-  create(@Body() createPersonDto: CreatePersonDto) {
+  @Post('createPerson')
+  @UseFilters(TestFilter) // ValidationPipe配合UseFilters 可以自定义返回错误
+  create(@Body(new ValidationPipe()) createPersonDto: CreatePersonDto) {
     return this.personService.create(createPersonDto);
   }
 

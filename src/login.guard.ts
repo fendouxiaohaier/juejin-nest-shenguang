@@ -16,6 +16,7 @@ export class LoginGuard implements CanActivate {
   @Inject(AppService)
   private readonly appServer: AppService;
 
+  /** 获取metadata的对象 */
   @Inject(Reflector)
   private reflector: Reflector;
 

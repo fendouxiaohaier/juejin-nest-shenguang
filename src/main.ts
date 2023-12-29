@@ -24,7 +24,7 @@ async function bootstrap() {
   // 全局守卫
   // app.useGlobalGuards(new LoginGuard());
 
-  // 全局拦截器
+  // 全局拦截器 这种方式的拦截器里面不能注入其他依赖
   // app.useGlobalInterceptors(new TimeInterceptor());
 
   // 全局异常补捕获

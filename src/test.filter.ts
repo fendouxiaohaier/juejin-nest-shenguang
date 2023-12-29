@@ -12,10 +12,11 @@ import { Response } from 'express';
 @Catch(BadRequestException)
 export class TestFilter implements ExceptionFilter {
   catch(exception: BadRequestException, host: ArgumentsHost) {
+    console.log('捕获异常-TestFilter-exception:', exception.getResponse());
     const response: Response = host.switchToHttp().getResponse();
 
-    response.status(400).json({
-      statusCode: 400,
+    response.status(500).json({
+      statusCode: 500,
       message: 'test-test: ' + exception.message,
     });
   }

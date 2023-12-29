@@ -19,7 +19,7 @@ import { CustomDecoratorModule } from './custom-decorator/custom-decorator.modul
     },
     {
       provide: APP_INTERCEPTOR, // 注意这里的provide名字是从nest/core里印出来的
-      useClass: TimeInterceptor, // 这种方式注入拦截器也是全局，这种方式可以在里面再注意其他provide
+      useClass: TimeInterceptor, // 这种方式注入拦截器也是全局，这种方式可以在里面再注入其他provide
     },
   ],
 })
@@ -28,6 +28,8 @@ export class AppModule implements NestModule {
     // 只针对路由的中间件
     // 这里只对aaa*的路由生效
     consumer.apply(LogMiddleware).forRoutes('aaa*');
+    // 下面这种forRoutes('*')针对任意路由生效
+    // consumer.apply(LogMiddleware).forRoutes('*');
 
     // throw new Error('Method not implemented.');
   }
