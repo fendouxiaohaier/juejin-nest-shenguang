@@ -19,7 +19,7 @@ export class TimeInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       tap(() => {
-        console.log('time-1: ', Date.now() - startTime);
+        // console.log('time-1: ', Date.now() - startTime);
       }),
     );
   }

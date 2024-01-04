@@ -9,9 +9,10 @@ import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { CustomDecoratorModule } from './custom-decorator/custom-decorator.module';
 import { TestFilter } from './test.filter';
 import { UploadFileModule } from './upload-file/upload-file.module';
+import { UploadLargeFileModule } from './upload-large-file/upload-large-file.module';
 
 @Module({
-  imports: [PersonModule, CustomDecoratorModule, UploadFileModule],
+  imports: [PersonModule, CustomDecoratorModule, UploadFileModule, UploadLargeFileModule],
   controllers: [AppController],
   providers: [
     AppService,

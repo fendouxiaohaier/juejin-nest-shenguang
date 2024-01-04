@@ -58,8 +58,8 @@ export class UploadFileController {
     return this.uploadFileService.remove(+id);
   }
 
-  // 单文件上传
   /**
+   * @description 单文件上传
    * FileSizeValidationPipePipe 对文件进行验证
    * @param file
    * @param body
@@ -122,7 +122,10 @@ export class UploadFileController {
     console.log('打印日志看看-files:', files);
     console.log('打印日志看看-body:', body);
 
-    return 'success';
+    return {
+      code: 0,
+      message: 'success',
+    };
   }
 
   // 任意文件上传

@@ -30,7 +30,7 @@ async function bootstrap() {
   // 全局异常补捕获
   // app.useGlobalFilters(new TestFilter());
 
-  await app.listen(3000);
+  await app.listen(3002);
 }
 
 bootstrap();
