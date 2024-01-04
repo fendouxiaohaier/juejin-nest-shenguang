@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+</head>
+<body>
+    <div>单文件上传</div>
+    <input id="fileInput" type="file" />
+    <script>
+        const fileInput = document.querySelector('#fileInput');
+
+        async function formData() {
+            const data = new FormData();
+            data.set('name','光');
+            data.set('age', 20);
+            data.set('fileA', fileInput.files[0]);
+
+            const res = await axios.post('http://localhost:3000/upload-file/uploadFile', data);
+            console.log(res);
+        }
+
+        fileInput.onchange = formData;
+    </script>
+
+    <div>---------</div>
+
+多文件上传：
+<input id="filesInput" type="file" multiple/>
+<script>
+    {
+        const fileInput = document.querySelector('#filesInput');
+    
+        async function formData() {
+            const data = new FormData();
+            data.set('name','光');
+            data.set('age', 20);
+            [...fileInput.files].forEach(item => {
+                data.append('filesA', item)
+            })
+    
+            const res = await axios.post('http://localhost:3000/upload-file/uploadFiles', data, {headers: { 'content-type': 'multipart/form-data' }});
+            console.log(res);
+        }
+    
+        fileInput.onchange = formData;
+    }
+</script>
+<div>--------</div>
+<div>
+    多文件多属性上传：
+</div>
+<input id="filesInputFields" type="file" multiple/>
+<script>
+    {
+        const fileInput = document.querySelector('#filesInputFields');
+    
+        async function formData3() {
+    const data = new FormData();
+    data.set('name','光');
+    data.set('age', 200);
+    data.append('aaa', fileInput.files[0]);
+    data.append('aaa', fileInput.files[1]);
+    data.append('bbb', fileInput.files[2]);
+    data.append('bbb', fileInput.files[3]);
+
+    const res = await axios.post('http://localhost:3000/upload-file/uploadFileFields', data);
+    console.log(res);
+}
+    
+        fileInput.onchange = formData3;
+    }
+</script>
+
+
+<div>--------</div>
+<div>
+    任意文件上传上传：
+</div>
+<input id="filesInputFieldsAny" type="file" multiple/>
+<script>
+    {
+        const fileInput = document.querySelector('#filesInputFieldsAny');
+    
+        async function formData3() {
+    const data = new FormData();
+    data.set('name','光');
+    data.set('age', 200);
+    data.append('aaa', fileInput.files[0]);
+    data.append('aaa', fileInput.files[1]);
+    data.append('bbb', fileInput.files[2]);
+    data.append('bbb', fileInput.files[3]);
+
+    const res = await axios.post('http://localhost:3000/upload-file/uploadAnyFile', data);
+    console.log(res);
+}
+    
+        fileInput.onchange = formData3;
+    }
+</script>
+</body>
+</html>
