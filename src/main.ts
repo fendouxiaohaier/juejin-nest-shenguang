@@ -7,6 +7,11 @@ import { TimeInterceptor } from './time.interceptor';
 import { TestFilter } from './test.filter';
 // import { LoginGuard } from './login.guard';
 
+import * as qs from 'qs';
+
+console.log(qs.stringify({ a: '1,2 3', b: '3,2, ' }));
+console.log(encodeURIComponent('www.baidu.com?a=1,2 3&b=3,2, '));
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
@@ -14,11 +19,11 @@ async function bootstrap() {
 
   // 再来一个全局中间件
   app.use((req: Request, res: Response, next: NextFunction) => {
-    console.log('global before request', req.header);
+    // console.log('global before request', req.header);
 
     next();
 
-    console.log('global after response', res.header);
+    // console.log('global after response', res.header);
   });
 
   // 全局守卫

@@ -26,14 +26,11 @@ export class UploadLargeFileController {
   @Get('merge')
   merge(@Query('name') name: string) {
     const chunkDir = 'uploads/chunks_' + name;
-    console.log('打印日志看看123-chunkDir:', chunkDir);
+    console.log('打印日志看看-merge-chunkDir:', chunkDir);
 
-    return {
-      name: chunkDir,
-    };
     const files = fs.readdirSync(chunkDir);
 
-    console.log('打印日志看看123-files:', files.length);
+    console.log('打印日志看看-merge-files:', files.length);
 
     let startPos = 0;
     files
@@ -53,6 +50,8 @@ export class UploadLargeFileController {
 
         startPos += fs.statSync(filePath).size;
       });
+
+      
   }
 
   @Post()
