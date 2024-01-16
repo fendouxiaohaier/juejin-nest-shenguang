@@ -23,65 +23,6 @@ export class UploadLargeFileController {
     private readonly uploadLargeFileService: UploadLargeFileService,
   ) {}
 
-  @Get('merge')
-  merge(@Query('name') name: string) {
-    const chunkDir = 'uploads/chunks_' + name;
-    console.log('打印日志看看-merge-chunkDir:', chunkDir);
-
-    const files = fs.readdirSync(chunkDir);
-
-    console.log('打印日志看看-merge-files:', files.length);
-
-    let startPos = 0;
-    files
-      .sort((a: string, b: string) => {
-        const indexA = parseInt(a.split('-').pop());
-        const indexB = parseInt(b.split('-').pop());
-        return indexA - indexB;
-      })
-      .map((file) => {
-        const filePath = chunkDir + '/' + file;
-        const stream = fs.createReadStream(filePath);
-        stream.pipe(
-          fs.createWriteStream('uploads/' + name, {
-            start: startPos,
-          }),
-        );
-
-        startPos += fs.statSync(filePath).size;
-      });
-
-      
-  }
-
-  @Post()
-  create(@Body() createUploadLargeFileDto: CreateUploadLargeFileDto) {
-    return this.uploadLargeFileService.create(createUploadLargeFileDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.uploadLargeFileService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.uploadLargeFileService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateUploadLargeFileDto: UpdateUploadLargeFileDto,
-  ) {
-    return this.uploadLargeFileService.update(+id, updateUploadLargeFileDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.uploadLargeFileService.remove(+id);
-  }
-
   /**
    * @description 分片上传文件
    * @param files
@@ -113,5 +54,62 @@ export class UploadLargeFileController {
     if (fs.existsSync(files[0].path)) {
       fs.rmSync(files[0].path);
     }
+  }
+
+  @Get('merge')
+  merge(@Query('name') name: string) {
+    const chunkDir = 'uploads/chunks_' + name;
+    console.log('打印日志看看-merge-chunkDir:', chunkDir);
+
+    const files = fs.readdirSync(chunkDir);
+
+    console.log('打印日志看看-merge-files:', files.length);
+
+    let startPos = 0;
+    files
+      .sort((a: string, b: string) => {
+        const indexA = parseInt(a.split('-').pop());
+        const indexB = parseInt(b.split('-').pop());
+        return indexA - indexB;
+      })
+      .map((file) => {
+        const filePath = chunkDir + '/' + file;
+        const stream = fs.createReadStream(filePath);
+        stream.pipe(
+          fs.createWriteStream('uploads/' + name, {
+            start: startPos,
+          }),
+        );
+
+        startPos += fs.statSync(filePath).size;
+      });
+  }
+
+  @Post()
+  create(@Body() createUploadLargeFileDto: CreateUploadLargeFileDto) {
+    return this.uploadLargeFileService.create(createUploadLargeFileDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.uploadLargeFileService.findAll();
+  }
+
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.uploadLargeFileService.findOne(+id);
+  }
+
+  @Patch(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateUploadLargeFileDto: UpdateUploadLargeFileDto,
+  ) {
+    return this.uploadLargeFileService.update(+id, updateUploadLargeFileDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.uploadLargeFileService.remove(+id);
   }
 }

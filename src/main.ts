@@ -7,11 +7,6 @@ import { TimeInterceptor } from './time.interceptor';
 import { TestFilter } from './test.filter';
 // import { LoginGuard } from './login.guard';
 
-import * as qs from 'qs';
-
-console.log(qs.stringify({ a: '1,2 3', b: '3,2, ' }));
-console.log(encodeURIComponent('www.baidu.com?a=1,2 3&b=3,2, '));
-
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
