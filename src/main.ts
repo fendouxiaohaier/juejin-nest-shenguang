@@ -5,6 +5,7 @@ import { Request, Response, NextFunction } from 'express';
 import { AppModule } from './app.module';
 import { TimeInterceptor } from './time.interceptor';
 import { TestFilter } from './test.filter';
+import { WinstonLogger } from './util/winstonLogger';
 // import { LoginGuard } from './login.guard';
 
 async function bootstrap() {
@@ -32,6 +33,9 @@ async function bootstrap() {
 
   // 全局异常补捕获
   // app.useGlobalFilters(new TestFilter());
+
+  // 将系统默认的日志系统改为使用自定义logger系统
+  app.useLogger(new WinstonLogger());
 
   await app.listen(8008);
 }

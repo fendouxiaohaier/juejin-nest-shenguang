@@ -67,8 +67,9 @@ export class PersonController {
   query(@Query('name') name: string, @Query('age') age: number) {
     // 采用nest提供的系统日志系统
     this.logger.debug('aaa');
-    this.logger.error('bbb');
-    this.logger.log('ccc');
+    this.logger.error('bbb123');
+    this.logger.log('ccc123', PersonController.name);
+
     // 返回字符串 接收到的data里就是字符串
     return `received: name=${name},age=${age}`;
   }
