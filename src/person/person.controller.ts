@@ -18,6 +18,7 @@ import { PersonService } from './person.service';
 import { CreatePersonDto } from './dto/create-person.dto';
 import { UpdatePersonDto } from './dto/update-person.dto';
 import { TestFilter } from 'src/test.filter';
+import { logger } from 'src/util/logger';
 
 // 下面五种方式传递数据
 @Controller('api/person/')
@@ -64,6 +65,7 @@ export class PersonController {
   // query param 方式
   @Get('find')
   query(@Query('name') name: string, @Query('age') age: number) {
+    // 采用nest提供的系统日志系统
     this.logger.debug('aaa');
     this.logger.error('bbb');
     this.logger.log('ccc');
@@ -74,6 +76,9 @@ export class PersonController {
   // url param 方式
   @Get(':id')
   urlParam(@Param('id') id: string) {
+    // 使用winston日志系统输出日志
+    logger.info('info 日志');
+    logger.error('error 日志');
     // 返回字符串 接收到的data里就是字符串
     return `received: id=${id}`;
   }
