@@ -8,7 +8,10 @@ import { TestFilter } from './test.filter';
 // import { LoginGuard } from './login.guard';
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
+    // logger: false, // 设置不开启全局日志
+    // logger: ['error'], // 只展示error类型的日志
+  });
 
   app.useStaticAssets('public', { prefix: '/static' });
 
@@ -30,7 +33,7 @@ async function bootstrap() {
   // 全局异常补捕获
   // app.useGlobalFilters(new TestFilter());
 
-  await app.listen(3002);
+  await app.listen(8008);
 }
 
 bootstrap();

@@ -11,6 +11,7 @@ import {
   UploadedFiles,
   ValidationPipe,
   UseFilters,
+  Logger,
 } from '@nestjs/common';
 import { AnyFilesInterceptor } from '@nestjs/platform-express';
 import { PersonService } from './person.service';
@@ -21,7 +22,11 @@ import { TestFilter } from 'src/test.filter';
 // 下面五种方式传递数据
 @Controller('api/person/')
 export class PersonController {
-  constructor(private readonly personService: PersonService) {}
+  private logger: Logger;
+
+  constructor(private readonly personService: PersonService) {
+    this.logger = new Logger();
+  }
 
   // 文件方式
   @Post('file')
@@ -59,6 +64,9 @@ export class PersonController {
   // query param 方式
   @Get('find')
   query(@Query('name') name: string, @Query('age') age: number) {
+    this.logger.debug('aaa');
+    this.logger.error('bbb');
+    this.logger.log('ccc');
     // 返回字符串 接收到的data里就是字符串
     return `received: name=${name},age=${age}`;
   }
