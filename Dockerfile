@@ -25,7 +25,10 @@ RUN npm config set registry https://registry.npmmirror.com/
 
 RUN npm install --production
 
+RUN npm install pm2 -g
+
 EXPOSE 8008
 
-CMD ["node", "/app/main.js"]
+# CMD ["node", "/app/main.js"]
 
+CMD ["pm2-runtime", "/app/main.js"]
