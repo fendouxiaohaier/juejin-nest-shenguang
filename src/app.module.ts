@@ -10,9 +10,10 @@ import { CustomDecoratorModule } from './custom-decorator/custom-decorator.modul
 import { TestFilter } from './test.filter';
 import { UploadFileModule } from './upload-file/upload-file.module';
 import { UploadLargeFileModule } from './upload-large-file/upload-large-file.module';
+import { TestMysqlModule } from './test-mysql/test-mysql.module';
 
 @Module({
-  imports: [PersonModule, CustomDecoratorModule, UploadFileModule, UploadLargeFileModule],
+  imports: [PersonModule, CustomDecoratorModule, UploadFileModule, UploadLargeFileModule, TestMysqlModule],
   controllers: [AppController],
   providers: [
     AppService,
