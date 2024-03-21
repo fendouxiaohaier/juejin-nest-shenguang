@@ -28,9 +28,9 @@ export const pool = mysql.createPool({
 
 // 使用orm
 export const AppDataSource = new DataSource({
-  type: 'mysql',
-  host: 'localhost',
-  port: 3306,
+  type: 'mysql', // 是数据库的类型，因为 TypeORM 不只支持 MySQL 还支持 postgres、oracle、sqllite 等数据库
+  host: 'localhost', // 数据库主机
+  port: 3306, // 数据库端口
   username: 'root',
   password: 'root',
   database: 'docker_practice',
