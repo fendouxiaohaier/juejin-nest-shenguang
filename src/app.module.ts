@@ -15,6 +15,7 @@ import { TestNestTypeormModule } from './test-nest-typeorm/test-nest-typeorm.mod
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { User } from './test-nest-typeorm/entities/test-nest-typeorm.entity';
+import { TestNestRedisModule } from './test-nest-redis/test-nest-redis.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { User } from './test-nest-typeorm/entities/test-nest-typeorm.entity';
         authPlugin: 'sha256_password',
       },
     }),
+    TestNestRedisModule,
   ],
   controllers: [AppController],
   providers: [
