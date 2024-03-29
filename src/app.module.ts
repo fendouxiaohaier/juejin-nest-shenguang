@@ -16,6 +16,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { User } from './test-nest-typeorm/entities/test-nest-typeorm.entity';
 import { TestNestRedisModule } from './test-nest-redis/test-nest-redis.module';
+import { TestNestSessionCookitJwtModule } from './test-nest-session-cookit-jwt/test-nest-session-cookit-jwt.module';
 
 @Module({
   imports: [
@@ -44,6 +45,7 @@ import { TestNestRedisModule } from './test-nest-redis/test-nest-redis.module';
       },
     }),
     TestNestRedisModule,
+    TestNestSessionCookitJwtModule,
   ],
   controllers: [AppController],
   providers: [
