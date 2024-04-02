@@ -65,19 +65,22 @@ export class TestNestSessionCookitJwtController {
       try {
         // 解析token
         const token = authorization.split(' ')[1];
+        // 验证token
         const data = this.jwtService.verify(token);
 
         // 生成新token 内容为原来的token+1
         const newToken = this.jwtService.sign({
           count: data.count + 1,
         });
+
         // 插入header中原来的token
         response.setHeader('token', newToken);
 
-        // 返回新的值
+        // 返回到http接口的新的值
         return data.count + 1;
       } catch (e) {
         console.log(e);
+        // 解析错误 抛出无权限异常
         throw new UnauthorizedException();
       }
     } else {
