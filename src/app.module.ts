@@ -15,8 +15,9 @@ import { TestNestTypeormModule } from './test-nest-typeorm/test-nest-typeorm.mod
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { User } from './test-nest-typeorm/entities/test-nest-typeorm.entity';
-import { TestNestRedisModule } from './test-nest-redis/test-nest-redis.module';
+// import { TestNestRedisModule } from './test-nest-redis/test-nest-redis.module';
 import { TestNestSessionCookitJwtModule } from './test-nest-session-cookit-jwt/test-nest-session-cookit-jwt.module';
+import { MysqlTypeormJwtLoginModule } from './mysql-typeorm-jwt-login/mysql-typeorm-jwt-login.module';
 
 @Module({
   imports: [
@@ -44,8 +45,9 @@ import { TestNestSessionCookitJwtModule } from './test-nest-session-cookit-jwt/t
         authPlugin: 'sha256_password',
       },
     }),
-    TestNestRedisModule,
+    // TestNestRedisModule, // 暂时注销redis相关测试代码
     TestNestSessionCookitJwtModule,
+    MysqlTypeormJwtLoginModule,
   ],
   controllers: [AppController],
   providers: [
