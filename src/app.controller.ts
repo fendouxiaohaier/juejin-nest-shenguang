@@ -8,7 +8,7 @@ import {
   UseInterceptors,
 } from '@nestjs/common';
 import { AppService } from './app.service';
-import { LoginGuard } from './login.guard';
+import { LoginGuard } from './global-login.guard';
 import { TimeInterceptor } from './time.interceptor';
 import { ValidatePipe } from './validate.pipe';
 import { TestFilter } from './test.filter';

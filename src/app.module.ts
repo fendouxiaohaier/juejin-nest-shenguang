@@ -3,7 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PersonModule } from './person/person.module';
 import { LogMiddleware } from './log.middleware';
-import { LoginGuard } from './login.guard';
+import { LoginGuard } from './global-login.guard';
 import { TimeInterceptor } from './time.interceptor';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { CustomDecoratorModule } from './custom-decorator/custom-decorator.module';
@@ -18,6 +18,10 @@ import { User } from './test-nest-typeorm/entities/test-nest-typeorm.entity';
 // import { TestNestRedisModule } from './test-nest-redis/test-nest-redis.module';
 import { TestNestSessionCookitJwtModule } from './test-nest-session-cookit-jwt/test-nest-session-cookit-jwt.module';
 import { MysqlTypeormJwtLoginModule } from './mysql-typeorm-jwt-login/mysql-typeorm-jwt-login.module';
+import { TestAclModule } from './test-acl/test-acl.module';
+import { AaaModuleModule } from './aaa-module/aaa-module.module';
+import { BbbModuleModule } from './bbb-module/bbb-module.module';
+import { TestAclRedisModule } from './test-acl-redis/test-acl-redis.module';
 
 @Module({
   imports: [
@@ -25,29 +29,35 @@ import { MysqlTypeormJwtLoginModule } from './mysql-typeorm-jwt-login/mysql-type
     CustomDecoratorModule,
     UploadFileModule,
     UploadLargeFileModule,
-    TestMysqlModule,
-    TestNestTypeormModule,
+    // TestMysqlModule,
+    // TestNestTypeormModule,
     // 全局引入TypeOrm示例
-    TypeOrmModule.forRoot({
-      type: 'mysql', // 是数据库的类型，因为 TypeORM 不只支持 MySQL 还支持 postgres、oracle、sqllite 等数据库
-      host: 'localhost', // 数据库主机
-      port: 3306, // 数据库端口
-      username: 'root',
-      password: 'root',
-      database: 'docker_practice',
-      synchronize: true,
-      logging: true,
-      entities: [User],
-      migrations: [],
-      subscribers: [],
-      connectorPackage: 'mysql2',
-      extra: {
-        authPlugin: 'sha256_password',
-      },
-    }),
+    // TypeOrmModule.forRoot({
+    //   type: 'mysql', // 是数据库的类型，因为 TypeORM 不只支持 MySQL 还支持 postgres、oracle、sqllite 等数据库
+    //   host: 'localhost', // 数据库主机
+    //   port: 3306, // 数据库端口
+    //   username: 'root',
+    //   password: 'root',
+    //   database: 'docker_practice',
+    //   synchronize: true,
+    //   logging: true,
+    //   entities: [User],
+    //   migrations: [],
+    //   subscribers: [],
+    //   connectorPackage: 'mysql2',
+    //   extra: {
+    //     authPlugin: 'sha256_password',
+    //   },
+    // }),
     // TestNestRedisModule, // 暂时注销redis相关测试代码
     TestNestSessionCookitJwtModule,
-    MysqlTypeormJwtLoginModule,
+    TestAclModule,
+    // 辅助测试test-acl
+    AaaModuleModule,
+    // 辅助测试est-acl
+    BbbModuleModule,
+    // MysqlTypeormJwtLoginModule,  // 测过滤就注释掉，免得启动点饿时候去链接mysql
+    TestAclRedisModule,
   ],
   controllers: [AppController],
   providers: [
@@ -59,7 +69,7 @@ import { MysqlTypeormJwtLoginModule } from './mysql-typeorm-jwt-login/mysql-type
     // },
     {
       provide: APP_GUARD,
-      useClass: LoginGuard, // 这种方式注入守卫也是全局，这种方式可以在里面再注意其他provide
+      useClass: LoginGuard, // 这种方式注入守卫也是全局，这种方式可以在里面再注入其他provide
     },
     {
       provide: APP_INTERCEPTOR, // 注意这里的provide名字是从nest/core里印出来的
