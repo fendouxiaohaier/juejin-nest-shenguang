@@ -5,26 +5,37 @@ import { PersonModule } from './person/person.module';
 import { LogMiddleware } from './log.middleware';
 import { LoginGuard } from './global-login.guard';
 import { TimeInterceptor } from './time.interceptor';
-import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
+import { APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { CustomDecoratorModule } from './custom-decorator/custom-decorator.module';
-import { TestFilter } from './test.filter';
+// import { TestFilter } from './test.filter';
 import { UploadFileModule } from './upload-file/upload-file.module';
 import { UploadLargeFileModule } from './upload-large-file/upload-large-file.module';
-import { TestMysqlModule } from './test-mysql/test-mysql.module';
-import { TestNestTypeormModule } from './test-nest-typeorm/test-nest-typeorm.module';
-import { TypeOrmModule } from '@nestjs/typeorm';
+// import { TestMysqlModule } from './test-mysql/test-mysql.module';
+// import { TestNestTypeormModule } from './test-nest-typeorm/test-nest-typeorm.module';
+// import { TypeOrmModule } from '@nestjs/typeorm';
 
-import { User } from './test-nest-typeorm/entities/test-nest-typeorm.entity';
+// import { User } from './test-nest-typeorm/entities/test-nest-typeorm.entity';
 // import { TestNestRedisModule } from './test-nest-redis/test-nest-redis.module';
-import { TestNestSessionCookitJwtModule } from './test-nest-session-cookit-jwt/test-nest-session-cookit-jwt.module';
-import { MysqlTypeormJwtLoginModule } from './mysql-typeorm-jwt-login/mysql-typeorm-jwt-login.module';
-import { TestAclModule } from './test-acl/test-acl.module';
+// import { TestNestSessionCookitJwtModule } from './test-nest-session-cookit-jwt/test-nest-session-cookit-jwt.module';
+// import { MysqlTypeormJwtLoginModule } from './mysql-typeorm-jwt-login/mysql-typeorm-jwt-login.module';
+// import { TestAclModule } from './test-acl/test-acl.module';
 import { AaaModuleModule } from './aaa-module/aaa-module.module';
 import { BbbModuleModule } from './bbb-module/bbb-module.module';
-import { TestAclRedisModule } from './test-acl-redis/test-acl-redis.module';
+// import { TestAclRedisModule } from './test-acl-redis/test-acl-redis.module';
+import { TestRbacModule } from './test-rbac/test-rbac.module';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
+    // 注入jwt，在后续通过@Inject(JwtService)引入
+    JwtModule.register({
+      secret: 'guang', // 秘钥
+      signOptions: {
+        expiresIn: '7d', // 过期时间
+      },
+      // 设置为全局模块，这样不用每个模块都引入 10以上版本的@nestjs/jwt才有
+      global: true,
+    }),
     PersonModule,
     CustomDecoratorModule,
     UploadFileModule,
@@ -50,14 +61,15 @@ import { TestAclRedisModule } from './test-acl-redis/test-acl-redis.module';
     //   },
     // }),
     // TestNestRedisModule, // 暂时注销redis相关测试代码
-    TestNestSessionCookitJwtModule,
-    TestAclModule,
+    // TestNestSessionCookitJwtModule,  // 测试登录时使用session或jwt保存登录数据
+    // TestAclModule, // 测试基于访问控制表控制用户权限
     // 辅助测试test-acl
     AaaModuleModule,
-    // 辅助测试est-acl
+    // 辅助测试test-acl
     BbbModuleModule,
-    // MysqlTypeormJwtLoginModule,  // 测过滤就注释掉，免得启动点饿时候去链接mysql
-    TestAclRedisModule,
+    TestRbacModule,
+    // MysqlTypeormJwtLoginModule,  // 测过就注释掉，免得启动点饿时候去链接mysql
+    // TestAclRedisModule,
   ],
   controllers: [AppController],
   providers: [

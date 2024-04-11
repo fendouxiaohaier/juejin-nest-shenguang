@@ -52,7 +52,7 @@ async function bootstrap() {
   );
   // 入口模块启用session
 
-  // 全局启动ValidationPipe
+  // 全局启动ValidationPipe 这样就可以和class-validator配合，对dto进行验证
   app.useGlobalPipes(new ValidationPipe());
   // 全局启动ValidationPipe
 

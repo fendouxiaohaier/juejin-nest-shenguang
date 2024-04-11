@@ -7,7 +7,7 @@ import { LoginUserDto } from './dto/login-user.dto';
 
 @Injectable()
 export class TestAclService {
-  // 注入typeorm处理器
+  // 通过@InjectEntityManager方式注入typeorm处理器
   @InjectEntityManager()
   entityManager: EntityManager;
 

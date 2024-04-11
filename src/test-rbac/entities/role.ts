@@ -2,31 +2,32 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Permission } from './permission';
 
-@Entity({
-  name: 'permission',
-})
-export class Permission {
+@Entity()
+export class Role {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({
-    length: 50,
+    length: 20,
   })
   name: string;
-
-  @Column({
-    length: 100,
-    nullable: true,
-  })
-  desc: string;
 
   @CreateDateColumn()
   createTime: Date;
 
   @UpdateDateColumn()
   updateTime: Date;
+
+  @ManyToMany(() => Permission)
+  @JoinTable({
+    name: 'role_permission_relation',
+  })
+  permissions: Permission[];
 }

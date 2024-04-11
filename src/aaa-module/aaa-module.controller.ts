@@ -12,7 +12,7 @@ import {
 import { AaaModuleService } from './aaa-module.service';
 import { CreateAaaModuleDto } from './dto/create-aaa-module.dto';
 import { UpdateAaaModuleDto } from './dto/update-aaa-module.dto';
-import { PermissionGuard } from 'src/test-acl/permission.guard';
+// import { PermissionGuard } from 'src/test-acl/permission.guard';
 
 @Controller('aaa-module')
 export class AaaModuleController {
@@ -25,7 +25,7 @@ export class AaaModuleController {
 
   @Get()
   @SetMetadata('permission', 'query_aaa') // 设置元数据 这里是为了标记这个findAll接口的访问权限，只有拥有‘query_aaa’的权限的用户才可以访问 判断逻辑在守卫PermissionGuard中
-  @UseGuards(PermissionGuard) // 引入鉴权路由守卫
+  // @UseGuards(PermissionGuard) // 引入鉴权路由守卫
   findAll() {
     return this.aaaModuleService.findAll();
   }
