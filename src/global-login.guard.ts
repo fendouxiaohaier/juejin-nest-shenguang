@@ -7,7 +7,6 @@ import {
 } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { AppService } from './app.service';
-import { Reflector } from '@nestjs/core';
 import { Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { Role } from './test-rbac/entities/role';
@@ -41,17 +40,13 @@ export class LoginGuard implements CanActivate {
   @Inject(JwtService)
   private jwtService: JwtService;
 
-  /** 获取metadata的对象 */
-  @Inject(Reflector)
-  private reflector: Reflector;
-
   canActivate(
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const request: Request = context.switchToHttp().getRequest();
 
-    // 过滤 login 接口
-    if (request.url.includes('login')) {
+    // 过滤 login 接口 和 refreshToken接口
+    if (request.url.includes('login') || request.url.includes('refreshToken')) {
       return true;
     }
 

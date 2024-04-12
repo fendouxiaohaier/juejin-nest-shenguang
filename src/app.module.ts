@@ -19,17 +19,18 @@ import { UploadLargeFileModule } from './upload-large-file/upload-large-file.mod
 // import { TestNestSessionCookitJwtModule } from './test-nest-session-cookit-jwt/test-nest-session-cookit-jwt.module';
 // import { MysqlTypeormJwtLoginModule } from './mysql-typeorm-jwt-login/mysql-typeorm-jwt-login.module';
 // import { TestAclModule } from './test-acl/test-acl.module';
-import { AaaModuleModule } from './aaa-module/aaa-module.module';
-import { BbbModuleModule } from './bbb-module/bbb-module.module';
+// import { AaaModuleModule } from './aaa-module/aaa-module.module';
+// import { BbbModuleModule } from './bbb-module/bbb-module.module';
 // import { TestAclRedisModule } from './test-acl-redis/test-acl-redis.module';
-import { TestRbacModule } from './test-rbac/test-rbac.module';
+// import { TestRbacModule } from './test-rbac/test-rbac.module';
 import { JwtModule } from '@nestjs/jwt';
+import { AccessTokenAndRefreshTokenModule } from './access-token-and-refresh-token/access-token-and-refresh-token.module';
 
 @Module({
   imports: [
-    // 注入jwt，在后续通过@Inject(JwtService)引入
+    // 注入jwt，后续通过@Inject(JwtService)引入
     JwtModule.register({
-      secret: 'guang', // 秘钥
+      secret: 'liYang', // 秘钥
       signOptions: {
         expiresIn: '7d', // 过期时间
       },
@@ -64,10 +65,11 @@ import { JwtModule } from '@nestjs/jwt';
     // TestNestSessionCookitJwtModule,  // 测试登录时使用session或jwt保存登录数据
     // TestAclModule, // 测试基于访问控制表控制用户权限
     // 辅助测试test-acl
-    AaaModuleModule,
+    // AaaModuleModule,
     // 辅助测试test-acl
-    BbbModuleModule,
-    TestRbacModule,
+    // BbbModuleModule,
+    // TestRbacModule,
+    AccessTokenAndRefreshTokenModule,
     // MysqlTypeormJwtLoginModule,  // 测过就注释掉，免得启动点饿时候去链接mysql
     // TestAclRedisModule,
   ],

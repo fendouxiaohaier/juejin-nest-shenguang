@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios@0.24.0/dist/axios.min.js"></script>
+</head>
+<body>
+    <script>
+        let refreshing = false;
+        const queue = [];
+
+        axios.interceptors.request.use(function (config) {
+            const accessToken = localStorage.getItem('access_token');
+
+            if(accessToken) {
+                config.headers.authorization = 'Bearer ' + accessToken;
+            }
+            return config;
+        })
+
+        axios.interceptors.response.use(
+            (response) => {
+                return response;
+            },
+            async (error) => {
+                let { data, config } = error.response;
+                // 如果正在获取新的refreshToken 则不继续往后处理，而是将请求存起来到queue中
+                if(refreshing) {
+                    return new Promise((resolve) => {
+                        queue.push({
+                            config,
+                            resolve
+                        });
+                    });
+                }
+
+                if (data.statusCode === 401 && !config.url.includes('access-token-and-refresh-token/refreshToken')) {
+                    refreshing = true;
+
+                    // 重新获取token
+                    const res = await refreshToken();
+
+                    refreshing = false;
+                    
+                    if(res.status === 200) {
+                        
+                        
+                        // 把之前存起来的请求一起发出去
+                        queue.forEach(({config, resolve}) => {
+                            resolve(axios(config))
+                        })
+                        
+                        // 获取新token成功后继续重发请求
+                        return axios(config);
+                    } else {
+                        // 重新获取token失败 则提示
+                        alert('登录过期，请重新登录');
+                        return Promise.reject(res.data)
+                    }
+                    
+                } else {
+                    return error.response;
+                }
+            }
+        )
+
+        async function refreshToken() {
+            const res = await axios.get('http://localhost:8008/access-token-and-refresh-token/refreshToken', {
+                params: {
+                    refresh_token: localStorage.getItem('refresh_token')
+                }
+            });
+
+            console.log('打印日志看看-refreshToken-res:', res)
+            localStorage.setItem('access_token', res.data.access_token || '');
+            localStorage.setItem('refresh_token', res.data.refresh_token || '');
+            return res;
+        }
+
+        async function login() {
+            const res = await axios.post('http://localhost:8008/access-token-and-refresh-token/login', {
+                username: 'guang',
+                password: '123456'
+            });
+            
+            localStorage.setItem('access_token', res.data.access_token);
+            localStorage.setItem('refresh_token', res.data.refresh_token);
+        }
+
+
+        async function query() {
+            try {
+                // 如果没有access_token  需要先登录
+                if(!localStorage.getItem('access_token')) {
+                    await login();
+                }
+
+                // 测试并发发送三个请求
+                 const data = await [
+                     axios.get('http://localhost:8008/access-token-and-refresh-token/query'),
+                     axios.get('http://localhost:8008/access-token-and-refresh-token/query'),
+                     axios.get('http://localhost:8008/access-token-and-refresh-token/query'),
+                 ];
+                 console.log('打印日志看看-data:', data)
+            } catch (error) {
+                console.log('打印日志看看-error:', error)
+            }
+        }
+    </script>
+    <button onclick="query()">查询</button>
+    <button onclick="login()">login</button>
+    <button onclick="refreshToken()">refreshToken</button>
+</body>

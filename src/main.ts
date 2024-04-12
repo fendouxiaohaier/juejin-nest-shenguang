@@ -16,7 +16,10 @@ async function bootstrap() {
     // logger: ['error'], // 只展示error类型的日志
   });
 
-  // 静态文件路径
+  // 开启跨域支持
+  app.enableCors();
+
+  // 静态文件路径 通过http://localhost:8008/static/可以访问
   app.useStaticAssets('public', { prefix: '/static' });
 
   // 再来一个全局中间件
