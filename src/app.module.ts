@@ -25,6 +25,7 @@ import { UploadLargeFileModule } from './upload-large-file/upload-large-file.mod
 // import { TestRbacModule } from './test-rbac/test-rbac.module';
 import { JwtModule } from '@nestjs/jwt';
 import { AccessTokenAndRefreshTokenModule } from './access-token-and-refresh-token/access-token-and-refresh-token.module';
+import { TestEnvConfigModule } from './test-env-config/test-env-config.module';
 
 @Module({
   imports: [
@@ -70,6 +71,7 @@ import { AccessTokenAndRefreshTokenModule } from './access-token-and-refresh-tok
     // BbbModuleModule,
     // TestRbacModule,
     AccessTokenAndRefreshTokenModule,
+    TestEnvConfigModule,
     // MysqlTypeormJwtLoginModule,  // 测过就注释掉，免得启动点饿时候去链接mysql
     // TestAclRedisModule,
   ],
@@ -81,10 +83,11 @@ import { AccessTokenAndRefreshTokenModule } from './access-token-and-refresh-tok
     //   provide: APP_FILTER,
     //   useClass: TestFilter,
     // },
-    {
-      provide: APP_GUARD,
-      useClass: LoginGuard, // 这种方式注入守卫也是全局，这种方式可以在里面再注入其他provide
-    },
+    // 测试获取配置文件，先注释
+    // {
+    //   provide: APP_GUARD,
+    //   useClass: LoginGuard, // 这种方式注入守卫也是全局，这种方式可以在里面再注入其他provide
+    // },
     {
       provide: APP_INTERCEPTOR, // 注意这里的provide名字是从nest/core里印出来的
       useClass: TimeInterceptor, // 这种方式注入拦截器也是全局，这种方式可以在里面再注入其他provide
