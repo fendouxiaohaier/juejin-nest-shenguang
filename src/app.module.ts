@@ -24,8 +24,9 @@ import { UploadLargeFileModule } from './upload-large-file/upload-large-file.mod
 // import { TestAclRedisModule } from './test-acl-redis/test-acl-redis.module';
 // import { TestRbacModule } from './test-rbac/test-rbac.module';
 import { JwtModule } from '@nestjs/jwt';
-import { AccessTokenAndRefreshTokenModule } from './access-token-and-refresh-token/access-token-and-refresh-token.module';
-import { TestEnvConfigModule } from './test-env-config/test-env-config.module';
+// import { AccessTokenAndRefreshTokenModule } from './access-token-and-refresh-token/access-token-and-refresh-token.module';
+// import { TestEnvConfigModule } from './test-env-config/test-env-config.module';
+import { DockerComposeTestModule } from './docker-compose-test/docker-compose-test.module';
 
 @Module({
   imports: [
@@ -70,8 +71,9 @@ import { TestEnvConfigModule } from './test-env-config/test-env-config.module';
     // 辅助测试test-acl
     // BbbModuleModule,
     // TestRbacModule,
-    AccessTokenAndRefreshTokenModule,
-    TestEnvConfigModule,
+    // AccessTokenAndRefreshTokenModule,
+    // TestEnvConfigModule,
+    DockerComposeTestModule,
     // MysqlTypeormJwtLoginModule,  // 测过就注释掉，免得启动点饿时候去链接mysql
     // TestAclRedisModule,
   ],

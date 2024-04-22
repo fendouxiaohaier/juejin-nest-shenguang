@@ -1,0 +1,27 @@
+# 使用docker-compose up跑起来
+services:
+  nest-app:
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    # 依赖另外两个service 为了解决顺序为了 这样就会先启动mysql-container和redis-container，再启动nest-app
+    depends_on:
+      - mysql-container
+      - redis-container
+    ports:
+      - '8008:8008' # 这里注意端口映射 前端的端口是外部访问docker的端口 后端的端口docker内部程序的端口
+  mysql-container:
+    image: mysql
+    ports:
+      - '3306:3306'
+    volumes:
+      - /tmp/docker/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: docker_practice
+      MYSQL_ROOT_PASSWORD: root
+  redis-container:
+    image: redis
+    ports:
+      - '6379:6379'
+    volumes:
+      - /Users/liyang/Documents/self/docker-redis-test:/data
