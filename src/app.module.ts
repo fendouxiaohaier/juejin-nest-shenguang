@@ -27,6 +27,7 @@ import { JwtModule } from '@nestjs/jwt';
 // import { AccessTokenAndRefreshTokenModule } from './access-token-and-refresh-token/access-token-and-refresh-token.module';
 // import { TestEnvConfigModule } from './test-env-config/test-env-config.module';
 import { DockerComposeTestModule } from './docker-compose-test/docker-compose-test.module';
+import { TestRedisSessionModule } from './test-redis-session/test-redis-session.module';
 
 @Module({
   imports: [
@@ -74,6 +75,7 @@ import { DockerComposeTestModule } from './docker-compose-test/docker-compose-te
     // AccessTokenAndRefreshTokenModule,
     // TestEnvConfigModule,
     DockerComposeTestModule,
+    TestRedisSessionModule,
     // MysqlTypeormJwtLoginModule,  // 测过就注释掉，免得启动点饿时候去链接mysql
     // TestAclRedisModule,
   ],

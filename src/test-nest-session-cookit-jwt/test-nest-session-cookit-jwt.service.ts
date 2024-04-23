@@ -16,7 +16,10 @@ export class TestNestSessionCookitJwtService {
     return `This action returns a #${id} testNestSessionCookitJwt`;
   }
 
-  update(id: number, updateTestNestSessionCookitJwtDto: UpdateTestNestSessionCookitJwtDto) {
+  update(
+    id: number,
+    updateTestNestSessionCookitJwtDto: UpdateTestNestSessionCookitJwtDto,
+  ) {
     return `This action updates a #${id} testNestSessionCookitJwt`;
   }
 

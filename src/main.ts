@@ -10,6 +10,8 @@ import * as session from 'express-session';
 import { ValidationPipe } from '@nestjs/common';
 // import { LoginGuard } from './global-login.guard';
 
+import * as cookieParser from 'cookie-parser';
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     // logger: false, // 设置不开启全局日志
@@ -44,6 +46,10 @@ async function bootstrap() {
 
   // 将系统默认的日志系统改为使用自定义logger系统
   // app.useLogger(new WinstonLogger());
+
+  // cookie 相关的解析包
+  app.use(cookieParser());
+  // cookie 相关的解析包
 
   // 全局入口模块启用session
   app.use(
