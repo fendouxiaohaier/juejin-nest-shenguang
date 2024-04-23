@@ -29,9 +29,11 @@ export class DockerComposeTestController {
 
   @Get()
   async findAll() {
+    // 获取redis所有的key
     const keys = await this.redisClient.keys('*');
     console.log(keys);
 
+    console.log('findAll');
     return this.dockerComposeTestService.findAll();
   }
 
