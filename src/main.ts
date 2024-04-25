@@ -21,7 +21,7 @@ async function bootstrap() {
   // 开启跨域支持
   app.enableCors();
 
-  // 静态文件路径 通过http://localhost:8008/static/可以访问
+  // 静态文件路径 通过http://localhost:8008/static/可以访问当前项目public下的文件
   app.useStaticAssets('public', { prefix: '/static' });
 
   // 再来一个全局中间件

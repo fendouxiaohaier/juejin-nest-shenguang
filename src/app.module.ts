@@ -28,6 +28,7 @@ import { JwtModule } from '@nestjs/jwt';
 // import { TestEnvConfigModule } from './test-env-config/test-env-config.module';
 import { DockerComposeTestModule } from './docker-compose-test/docker-compose-test.module';
 import { TestRedisSessionModule } from './test-redis-session/test-redis-session.module';
+import { NearbySearchModule } from './nearby-search/nearby-search.module';
 
 @Module({
   imports: [
@@ -76,6 +77,7 @@ import { TestRedisSessionModule } from './test-redis-session/test-redis-session.
     // TestEnvConfigModule,
     DockerComposeTestModule,
     TestRedisSessionModule,
+    NearbySearchModule,
     // MysqlTypeormJwtLoginModule,  // 测过就注释掉，免得启动点饿时候去链接mysql
     // TestAclRedisModule,
   ],
