@@ -29,6 +29,7 @@ import { JwtModule } from '@nestjs/jwt';
 import { DockerComposeTestModule } from './docker-compose-test/docker-compose-test.module';
 import { TestRedisSessionModule } from './test-redis-session/test-redis-session.module';
 import { NearbySearchModule } from './nearby-search/nearby-search.module';
+import { TestSendFetchMailModule } from './test-send-fetch-mail/test-send-fetch-mail.module';
 
 @Module({
   imports: [
@@ -78,6 +79,7 @@ import { NearbySearchModule } from './nearby-search/nearby-search.module';
     DockerComposeTestModule,
     TestRedisSessionModule,
     NearbySearchModule,
+    TestSendFetchMailModule,
     // MysqlTypeormJwtLoginModule,  // 测过就注释掉，免得启动点饿时候去链接mysql
     // TestAclRedisModule,
   ],
