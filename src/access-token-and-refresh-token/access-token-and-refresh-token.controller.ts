@@ -33,6 +33,7 @@ export class AccessTokenAndRefreshTokenController {
 
   @Get('refreshToken')
   async refresh(@Query('refresh_token') refreshToken: string) {
+    console.log('打印日志看看-refreshToken:', refreshToken);
     try {
       // 解析refreshToken
       const data = this.jwtService.verify(refreshToken);

@@ -7,6 +7,6 @@ import { InjectRepository } from '@nestjs/typeorm';
 @Injectable()
 export class MysqlTypeormJwtLoginService {
   // 注入 User 对应的 Repository
-  @InjectRepository(User)
-  private userRepository: Repository<User>;
+  // @InjectRepository(User)
+  // private userRepository: Repository<User>;
 }

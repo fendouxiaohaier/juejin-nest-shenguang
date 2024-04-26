@@ -12,7 +12,7 @@ import { User } from './entities/user';
       port: 3306,
       username: 'root',
       password: 'root',
-      database: 'refresh_token_test',
+      database: 'docker_practice',
       synchronize: true,
       logging: true,
       entities: [User],

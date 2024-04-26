@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { MysqlTypeormJwtLoginService } from './mysql-typeorm-jwt-login.service';
 import { User } from './dto/create-mysql-typeorm-jwt-login.dto';
@@ -24,8 +25,9 @@ export class MysqlTypeormJwtLoginController {
     console.log('打印日志看看-loginUser:', loginUser);
   }
 
-  @Post('register')
-  register(@Body() registerUser: RegisterDto) {
-    console.log('打印日志看看-registerUser:', registerUser);
+  @Get('register')
+  register(@Query('address') address: number, @Query('a') a: number) {
+    console.log('打印日志看看-registerUser:', address);
+    console.log('打印日志看看-a:', a);
   }
 }
