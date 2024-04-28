@@ -7,6 +7,8 @@ import { TestLoginByEmailController } from './test-login-by-email.controller';
 import { UserModule } from './user/user.module';
 import { EmailModule } from './email/email.module';
 import { EmailUser } from './user/entity/User.entity';
+import { ConfigModule } from '@nestjs/config';
+import { RedisModule } from './redis/redis.module';
 
 /**
  * 通过邮箱验证码登录
@@ -31,6 +33,12 @@ import { EmailUser } from './user/entity/User.entity';
         authPlugin: 'sha256_password',
       },
     }),
+    // 引入配置文件，并声明为全局的,在使用的地方通过构造函数获取:constructor(private configService: ConfigService)
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: 'src/.env',
+    }),
+    RedisModule,
   ],
   controllers: [TestLoginByEmailController],
   providers: [TestLoginByEmailService],

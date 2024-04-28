@@ -3,6 +3,10 @@
   "collection": "@nestjs/schematics",
   "sourceRoot": "src",
   "compilerOptions": {
-    "deleteOutDir": true
+    "deleteOutDir": true,
+    "//":"// 添加 assets 为 *.env 这样就会在编译的时候把 src 下的 .env 文件复制到 dist 下。",
+    "assets": ["*.env"], 
+    "//":"改了 src 下的 .env 之后，dist 下的 .env 跟着改",
+    "watchAssets": true
   }
 }
