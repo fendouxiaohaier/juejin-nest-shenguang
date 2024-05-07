@@ -51,7 +51,7 @@ async function bootstrap() {
   app.use(cookieParser());
   // cookie 相关的解析包
 
-  // 全局入口模块启用session
+  // 在全局入口模块启用session
   app.use(
     session({
       secret: 'yang', // 密钥
@@ -59,7 +59,7 @@ async function bootstrap() {
       resave: false, // resave 为 true 是每次访问都会更新 session，不管有没有修改 session 的内容，而 false 是只有 session 内容变了才会去更新 session。
     }),
   );
-  // 入口模块启用session
+  // 在入口模块启用session
 
   // 全局启动ValidationPipe 这样就可以和class-validator配合，对dto进行验证
   app.useGlobalPipes(new ValidationPipe());

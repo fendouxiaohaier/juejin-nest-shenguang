@@ -33,6 +33,7 @@ import { TestSendFetchMailModule } from './test-send-fetch-mail/test-send-fetch-
 import { TestLoginByEmailModule } from './test-login-by-email/test-login-by-email.module';
 import { EmailUser } from './test-login-by-email/user/entity/User.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TestArticleViewModule } from './test-article-view/test-article-view.module';
 
 @Module({
   imports: [
@@ -99,7 +100,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     // TestRedisSessionModule,
     // NearbySearchModule,
     // TestSendFetchMailModule,
-    TestLoginByEmailModule,
+    // TestLoginByEmailModule,
+    TestArticleViewModule,
     // MysqlTypeormJwtLoginModule, // 测过就注释掉，免得启动点饿时候去链接mysql
     // TestAclRedisModule,
   ],

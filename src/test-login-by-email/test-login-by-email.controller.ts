@@ -31,6 +31,8 @@ export class TestLoginByEmailController {
 
     const codeInRedis = await this.redisService.get(`captcha_${email}`);
 
+    console.log('打印日志看看-codeInRedis:', codeInRedis);
+
     if (!codeInRedis) {
       throw new UnauthorizedException('验证码已失效');
     }
