@@ -34,6 +34,7 @@ import { TestLoginByEmailModule } from './test-login-by-email/test-login-by-emai
 import { EmailUser } from './test-login-by-email/user/entity/User.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TestArticleViewModule } from './test-article-view/test-article-view.module';
+import { EventEmitterTestModule } from './event-emitter-test/event-emitter-test.module';
 
 @Module({
   imports: [
@@ -62,6 +63,7 @@ import { TestArticleViewModule } from './test-article-view/test-article-view.mod
       // 设置为全局模块，这样不用每个模块都引入 10以上版本的@nestjs/jwt才有
       global: true,
     }),
+    EventEmitterTestModule,
     // PersonModule,
     // CustomDecoratorModule,
     // UploadFileModule,
@@ -101,7 +103,7 @@ import { TestArticleViewModule } from './test-article-view/test-article-view.mod
     // NearbySearchModule,
     // TestSendFetchMailModule,
     // TestLoginByEmailModule,
-    TestArticleViewModule,
+    // TestArticleViewModule,
     // MysqlTypeormJwtLoginModule, // 测过就注释掉，免得启动点饿时候去链接mysql
     // TestAclRedisModule,
   ],
