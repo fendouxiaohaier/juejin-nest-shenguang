@@ -35,6 +35,7 @@ import { EmailUser } from './test-login-by-email/user/entity/User.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TestArticleViewModule } from './test-article-view/test-article-view.module';
 import { EventEmitterTestModule } from './event-emitter-test/event-emitter-test.module';
+import { TestCityWeatherModule } from './test-city-weather/test-city-weather.module';
 
 @Module({
   imports: [
@@ -64,6 +65,7 @@ import { EventEmitterTestModule } from './event-emitter-test/event-emitter-test.
       global: true,
     }),
     EventEmitterTestModule,
+    TestCityWeatherModule,
     // PersonModule,
     // CustomDecoratorModule,
     // UploadFileModule,
