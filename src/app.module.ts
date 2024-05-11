@@ -36,6 +36,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { TestArticleViewModule } from './test-article-view/test-article-view.module';
 import { EventEmitterTestModule } from './event-emitter-test/event-emitter-test.module';
 import { TestCityWeatherModule } from './test-city-weather/test-city-weather.module';
+import { TestShortUrlModule } from './test-short-url/test-short-url.module';
 
 @Module({
   imports: [
@@ -66,6 +67,7 @@ import { TestCityWeatherModule } from './test-city-weather/test-city-weather.mod
     }),
     EventEmitterTestModule,
     TestCityWeatherModule,
+    TestShortUrlModule,
     // PersonModule,
     // CustomDecoratorModule,
     // UploadFileModule,
